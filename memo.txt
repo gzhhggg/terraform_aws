@@ -1,4 +1,4 @@
-
+ssh -i aws_test.pem ec2-user@18.181.115.146
 sudo yum update -y
 sudo yum -y install httpd
 sudo systemctl start httpd.service
