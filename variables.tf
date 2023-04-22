@@ -1,5 +1,6 @@
-variable "access_key" {}
-variable "secret_key" {}
+variable "access_key" { type = string }
+variable "secret_key" { type = string }
+variable "domain" { type = string}
 
 data "aws_region" "current" {}
 
@@ -25,4 +26,7 @@ locals {
       c = "ap-northeast-1c"
     }
   }
+
+  ami = "ami-052c9af0c988f8bbd"
+  instance_type = "t2.micro"
 }
