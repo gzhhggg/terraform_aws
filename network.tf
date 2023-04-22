@@ -93,3 +93,10 @@ resource "aws_route_table_association" "protect" {
   subnet_id = aws_subnet.protect[each.key].id
   route_table_id = aws_route_table.protect[each.key].id
 }
+
+resource "aws_route" "nat" {
+  for_each = aws_route_table.protect
+  destination_cidr_block = "0.0.0.0/0"
+  route_table_id = each.value.id
+  nat_gateway_id = aws_nat_gateway.default[each.key].id
+}
