@@ -3,3 +3,8 @@ sudo yum update -y
 sudo yum -y install httpd
 sudo systemctl start httpd.service
 sudo systemctl enable httpd.service
+
+mysqlに接続
+sudo yum -y install mysql
+mysql -h test-db.cnj6c1gtx31b.ap-northeast-1.rds.amazonaws.com -u root -p'password'
+
