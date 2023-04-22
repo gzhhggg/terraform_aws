@@ -1,6 +1,8 @@
 variable "access_key" { type = string }
 variable "secret_key" { type = string }
-variable "domain" { type = string}
+variable "domain" { type = string }
+variable "username" { type = string }
+variable "password" { type = string }
 
 data "aws_region" "current" {}
 

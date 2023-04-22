@@ -56,3 +56,21 @@ resource "aws_security_group" "protect" {
     Name = "protect"
   }
 }
+
+resource "aws_security_group" "private" {
+  name = "security_group_private"
+  description = "Allow postgres inbound traffic"
+  vpc_id = aws_vpc.default.id
+  tags = {
+    Name = "private"
+  }
+}
+
+resource "aws_security_group_rule" "private_inbound" {
+  type = "ingress"
+  from_port = 3306
+  to_port = 3306
+  protocol = "tcp"
+  source_security_group_id = aws_security_group.bastion.id
+  security_group_id = aws_security_group.private.id
+}
