@@ -4,6 +4,7 @@ variable "domain" { type = string }
 variable "username" { type = string }
 variable "password" { type = string }
 variable "baketname" { type = string }
+variable "adoress" { type = string }
 
 data "aws_region" "current" {}
 
