@@ -32,29 +32,31 @@ resource "aws_security_group" "protect" {
   name = "security_group_protect"
   description = "Allow bastion inbound traffic"
   vpc_id = aws_vpc.default.id
-  ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = [local.subnet.public.a]
-  }
-  ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = [local.subnet.public.a]
-  }
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
   tags = {
     Name = "protect"
   }
+}
+
+resource "aws_security_group_rule" "protect_inbound" {
+  for_each = toset([
+    "80",
+    "22",
+  ])
+  type = "ingress"
+  from_port = each.value
+  to_port = each.value
+  protocol = "tcp"
+  source_security_group_id = aws_security_group.bastion.id
+  security_group_id = aws_security_group.protect.id
+}
+
+resource "aws_security_group_rule" "protect_outbound" {
+  type = "egress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.protect.id
 }
 
 resource "aws_security_group" "private" {
@@ -71,6 +73,15 @@ resource "aws_security_group_rule" "private_inbound" {
   from_port = 3306
   to_port = 3306
   protocol = "tcp"
-  source_security_group_id = aws_security_group.bastion.id
+  source_security_group_id = aws_security_group.protect.id
+  security_group_id = aws_security_group.private.id
+}
+
+resource "aws_security_group_rule" "private_outbound" {
+  type = "egress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
   security_group_id = aws_security_group.private.id
 }
