@@ -1,4 +1,4 @@
-ssh -i aws_test.pem ec2-user@18.181.115.146
+ssh -i aws_test.pem ec2-user@3.113.137.131
 sudo yum update -y
 sudo yum -y install httpd
 sudo systemctl start httpd.service
@@ -8,3 +8,21 @@ mysqlに接続
 sudo yum -y install mysql
 mysql -h test-db.cnj6c1gtx31b.ap-northeast-1.rds.amazonaws.com -u root -p'password'
 
+ssh -i aws_test.pem ec2-user@3.113.137.131
+scp -i ~/.ssh/aws_test.pem ~/.ssh/aws_test.pem ec2-user@3.113.137.131:/home/ec2-user/
+mv aws_test.pem .ssh/
+chmod 600 ~/.ssh/aws_test.pem
+
+ssh -i ~/.ssh/aws_test.pem ec2-user@10.0.20.64
+
+sudo yum -y update
+sudo yum -y install httpd
+sudo systemctl start httpd.service
+sudo systemctl enable httpd.service
+
+ps -ef | grep httpd
+
+sudo vi /var/www/html/index.html
+
+
+ssh -i ~/.ssh/aws_test.pem ec2-user@10.0.20.215
