@@ -20,11 +20,11 @@ resource "aws_lb_listener" "default" {
 }
 
 resource "aws_lb_target_group" "default" {
-  name = "lb-target-group"
+  name        = "lb-target-group"
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
-  vpc_id = aws_vpc.default.id
+  vpc_id      = aws_vpc.default.id
 }
 
 resource "aws_lb_target_group_attachment" "default" {

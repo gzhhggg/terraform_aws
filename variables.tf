@@ -10,7 +10,7 @@ data "aws_region" "current" {}
 
 locals {
   vpc_name = "aws_test"
-  vpc_id = "10.0.0.0/16"
+  vpc_id   = "10.0.0.0/16"
 
   subnet = {
     public = {
@@ -31,6 +31,6 @@ locals {
     }
   }
 
-  ami = "ami-052c9af0c988f8bbd"
+  ami           = "ami-052c9af0c988f8bbd"
   instance_type = "t2.micro"
 }

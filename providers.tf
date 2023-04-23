@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     bucket = "adachi-terraform-aws-tfstate"
     region = "ap-northeast-1"
-    key = "terraform.tfstate"
+    key    = "terraform.tfstate"
   }
 }
 
@@ -20,9 +20,9 @@ provider "aws" {
   region = "ap-northeast-1"
   default_tags {
     tags = {
-      Project = "test-project"
-      Service = "test"
-      Env = "test"
+      Project      = "test-project"
+      Service      = "test"
+      Env          = "test"
       Provisioning = "terraform"
     }
   }
