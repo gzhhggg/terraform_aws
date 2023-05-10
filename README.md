@@ -12,6 +12,6 @@ RDSにはプライベートサブネットのインスタンスからしかア�
 ドメインは「お名前ドットコム」で購入
 
 # 今後すること
-github actionsを使ったterraform plan applyの実行
-ecr・ecsを使ってサーバー構築
-ci/cdの実装
+github actionsを使ったterraform plan applyの実行  
+ecr・ecsを使ってサーバー構築  
+ci/cdの実装  
